@@ -244,10 +244,12 @@ public class Program
                 Console.WriteLine("");
                 Console.WriteLine("Проводим второе тестирование. Пожалуйста, подождите...");
 
-                restSW.Start();
+                grpcSW.Reset();
+                grpcSW.Start();
                 await BigTestRest();
                 restSW.Stop();
 
+                grpcSW.Reset();
                 grpcSW.Start();
                 await BigTestGRPC();
                 grpcSW.Stop();
