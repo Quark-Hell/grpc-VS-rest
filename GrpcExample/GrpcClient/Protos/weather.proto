@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "WeatherClient";
+
+package weather;
+
+service WeatherService {
+  rpc GetCurrentWeather (WeatherRequest) returns (WeatherResponse);
+  rpc MonitorWeather (WeatherRequest) returns (stream WeatherResponse);
+  rpc GetCurrentWeathers(WeatherRequest) returns(RepWeatherResponse);
+  rpc MonitorWeathers (WeatherRequest) returns (stream RepWeatherResponse);
+
+  rpc TestGRPC(WeatherRequest) returns(RepWeatherResponse);
+}
+
+message WeatherRequest {
+  string city = 1;
+}
+
+message WeatherResponse {
+  string city = 1;
+  int32 temperature = 2;
+  string description = 3;
+  string timestamp = 4;
+}
+
+message RepWeatherResponse {
+  repeated WeatherResponse WeatherResponses = 1;
+}
